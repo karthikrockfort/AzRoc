@@ -1,0 +1,240 @@
+<!--************************************************************************************************
+ * Name         :  BondPoratalCommunityHeader
+ * Description  :  CommunityHeader
+ *
+ * @author 
+ * @date  24/05/2021
+ *
+ * Modification Log :
+ * Developer                 Date                   Description
+ ***************************************************************************************************
+ *Kumaresan S			 15/06/2021    			To Show Custom Navigation for the Portal User
+ ************************************************************************************************-->
+<aura:component controller="BondPortalCommunityUserProfile_AC"
+                extends="forceCommunity:navigationMenuBase"
+                implements="forceCommunity:themeLayout,forceCommunity:availableForAllPageTypes,forceCommunity:profileMenuInterface"
+                access="global"
+                >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:attribute name="options" type="String[]" default='' />
+    <aura:attribute name="isNavMenu" type="Boolean" default="false" />
+    <aura:attribute name="timeZone" type="String" />
+    <aura:attribute name="isActiveUsers" type="Boolean" default="false" />
+    <aura:attribute name="loginLink" type="String" />
+    <aura:attribute name ="faqPage" type="String"/>
+
+    <aura:attribute name="profileName" type="String" />
+    
+    <div class="slds-grid slds-wrap">
+         <div class="header-top">
+            <div class="slds-large-size_6-of-12">
+                  <ul class="slds-float_left">
+                       <li>
+                           <lightning:icon
+                                            class="slds-icon slds-input__icon slds-input__icon_left knowledge_base"
+                                            iconName="utility:knowledge_base"
+                                            size="x-small"
+                                            alternativeText="knowledge base"
+                                            /> 
+                           <a href="https://openbooks.az.gov/" target="_blank">Visit OpenBooks</a></li>
+                      <li>      <lightning:icon
+                                            class="slds-icon slds-input__icon slds-input__icon_left profileIcon"
+                                            iconName="utility:user"
+                                            size="x-small"
+                                            alternativeText="User"
+                                            /> 
+                          <a href="https://www.azoca.gov/" target="_blank">Ombudsman-Citizens' Aide</a></li>
+                      <li><a href="https://azdhs.gov/covid19/index.php" target="_blank">Get the facts on COVID-19</a></li>
+                  </ul>
+            </div>
+            <div class="slds-large-size_6-of-12 slds-float_right right-top">
+                       <ul class="slds-float_right">
+                		 <li><lightning:icon 
+                                             class="search-icon"
+                                             iconName="utility:search" 
+                                             alternativeText="search" title="search" />
+                             <a href="https://az.gov/search/google" target="_blank">AZ.Gov </a></li>
+                         <li>
+                              <a href="https://az.gov/" target="_blank">
+                                  <img src="{!$Resource.BondPoratalAzGov}"/> </a></li>
+                   
+                      </ul>
+            </div>
+        </div>
+    </div>
+    <div class="slds-grid slds-wrap headerDiv">
+   
+        <div class="slds-col slds-size_1-of-1 slds-small-size_12-of-12 slds-medium-size_12-of-12 slds-large-size_12-of-12 slds-p-left_medium headNav">
+            <div class="menu-item slds-col slds-size_1-of-1 slds-small-size_2-of-12 slds-medium-size_5-of-12 slds-large-size_5-of-12 slds-show_inline-block slds-float_left">
+               <a href="https://roc.az.gov/" target="_blank">
+                   
+                  <img src="{!$Resource.BondPortalLogo}" class="bondLogo"/>
+                <span class="logoSubText">Arizona Registrar of Contractors </span>
+            </a>
+            </div>
+            <!-- User Profile Settings  -->
+            <aura:if isTrue="{!v.isActiveUsers}">
+                <div class="slds-col slds-size_2-of-12 slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-m-top_x-small slds-show_inline-block slds-float_right profileIconTop" align="center">
+                    <ui:menu>
+                   
+                        <ui:menuTriggerLink aura:id="trigger">
+                            <lightning:icon
+                                            class="slds-icon slds-input__icon slds-input__icon_left profileIcon"
+                                            iconName="utility:user"
+                                            size="x-small"
+                                            alternativeText="User"
+                                            />
+                        </ui:menuTriggerLink>
+                        
+                        <ui:menuList class="actionMenu" aura:id="actionMenu">
+                            <div class="profile-icon">
+                              <lightning:icon iconName="action:user" alternativeText="user" title="user" />
+                                <p> <strong> {!v.profileName}</strong></p>
+								<p>{!v.profileEmail}</p>                               
+                            </div>
+                          
+                            <aura:iteration items="{!v.options}" var="itemLabel">
+                                
+                                <aura:if isTrue="{!itemLabel == 'My Profile'}">
+                                      <span class="option-outer">   
+                                          <lightning:icon
+                                            class="slds-icon slds-input__icon slds-input__icon_left profileListMenuIcon"
+                                            iconName="utility:user"
+                                            size="x-small"
+                                            alternativeText="User"
+                                            />
+                                        <ui:actionMenuItem
+                                                   label="{!itemLabel}"
+                                                   click="{!c.handleClick}"
+                                                   />
+                                    </span>
+                                </aura:if>
+                                <aura:if isTrue="{!itemLabel == 'Log Out'}">
+                                    
+                                      <span  class="option-outer"> <lightning:icon
+                                            class="slds-icon slds-input__icon slds-input__icon_left profileListMenuIcon"
+                                            iconName="utility:logout"
+                                            size="x-small"
+                                            alternativeText="logout"
+                                            />
+                                        <ui:actionMenuItem
+                                                   label="{!itemLabel}"
+                                                   click="{!c.handleClick}"
+                                                   />
+                                      </span> 
+                                </aura:if>
+                        
+                            </aura:iteration>
+                        </ui:menuList>
+                    </ui:menu>
+                    
+                </div>   
+                <aura:set attribute="else">
+                    <div
+                         class="slds-col slds-size_2-of-12 slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-m-top_small slds-p-right_x-small slds-show_inline-block slds-float_right paddingTop"
+                         align="center">
+                        <a style="color:white;font-size:16px" href="{!v.loginLink}" title="Login/Register">Login/Register</a>
+                    </div>
+                </aura:set>
+            </aura:if>     
+            <!-- Notifications  -->
+            <div class="slds-col slds-size_3-of-12 slds-small-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-m-top_small slds-show_inline-block slds-float_right paddingTop" align="center">
+                <forceCommunity:notifications/>
+            </div>
+            <!-- Menu Navigation  -->
+            <div class="menu-item slds-col slds-size_1-of-1 slds-small-size_6-of-12 slds-medium-size_6-of-12 slds-large-size_6-of-12 slds-show_inline-block slds-float_right paddingTop">
+                <div class="slds-grid slds-list_horizontal slds-float_right">
+                 
+                    <ul class="slds-list_horizontal menuList" onclick="{!c.onMenuClick}">
+                        <aura:iteration items="{!v.menuItems}" var="item">
+                            <aura:if isTrue="{!item.subMenu}">
+                                <div class="dropdown">
+                                    <li class="dropbtn">
+                                        <span class="{!item.active ? 'active' : ''}">
+                                            {!item.label}
+                                        </span>
+                                    </li>
+                             
+                                    <ul class="dropdown-content">
+                                        <aura:iteration items="{!item.subMenu}" var="subItem">
+                                            <li>
+                                                <a data-menu-item-id="{!subItem.id}" href=""
+                                                   >{!subItem.label}</a
+                                                    >
+                                            </li>
+                                        </aura:iteration>
+                                    </ul>
+                                </div>
+                                
+                                <aura:set attribute="else">
+                                    <li class="{!item.active ? 'active' : ''}">
+                                        <a data-menu-item-id="{!item.id}" href=""
+                                           >{!item.label}</a
+                                            >
+                                    </li>
+                                    
+                                </aura:set>
+                                
+                            </aura:if>
+                        </aura:iteration>
+                        <li class="dropbtn">Contractor Search</li> 
+                        <!--<li class="dropbtn " onclick="{!c.navigateFAQ}">FAQ </li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="nav-item slds-col slds-size_2-of-12 slds-show_inline-block slds-float_left">
+                <div class="slds-grid slds-list_horizontal slds-float_right">
+                    <aura:if isTrue="{!v.isNavMenu}">
+                        <div class="slds-show_inline-block" onclick="{!c.navMenuClose}">
+                            <lightning:icon
+                                            class="slds-float_right slds-p-top_x-small"
+                                            iconName="utility:rows"
+                                            size="medium"
+                                            />
+                        </div>
+                        <aura:set attribute="else">
+                            <div class="slds-show_inline-block" onclick="{!c.navMenuOpen}">
+                                <lightning:icon
+                                                class="slds-float_right slds-p-top_x-small"
+                                                iconName="utility:rows"
+                                                size="medium"
+                                                />
+                            </div>
+                        </aura:set>
+                    </aura:if>
+                    <aura:if isTrue="{!v.isNavMenu}">
+                        <ul class="slds-list_horizontal navList" onclick="{!c.onMenuClick}">
+                            <aura:iteration items="{!v.menuItems}" var="item">
+                                <aura:if isTrue="{!item.subMenu}">
+                                    <div class="dropdown">
+                                        <li class="dropbtn">
+                                            <span class="{!item.active ? 'active' : ''}">
+                                                {!item.label}
+                                            </span>
+                                        </li>
+                                        <ul class="dropdown-content">
+                                            <aura:iteration items="{!item.subMenu}" var="subItem">
+                                                <li>
+                                                    <a data-menu-item-id="{!subItem.id}" href=""
+                                                       >{!subItem.label}</a
+                                                        >
+                                                </li>
+                                            </aura:iteration>
+                                        </ul>
+                                    </div>
+                                    <aura:set attribute="else">
+                                        <li class="{!item.active ? 'active' : ''}">
+                                            <a data-menu-item-id="{!item.id}" href=""
+                                               >{!item.label}</a
+                                                >
+                                        </li>
+                                    </aura:set>
+                                </aura:if>
+                            </aura:iteration>
+                        </ul>
+                    </aura:if>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

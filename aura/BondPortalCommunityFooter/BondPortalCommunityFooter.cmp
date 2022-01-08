@@ -1,0 +1,44 @@
+<!-- ************************************************************************************************************
+* Name              :  BondPoratalCommunityFooter
+* Summary           :  It's a common footer for all community pages
+* Author            :  MST
+* Date              :  21/05/2021
+* Modification Log  :
+
+* Developer                 Date                   Description
+_________________________________________________________________________________________________________________
+Kumaresan S               15/06/2021             It's a common footer for all community pages
+************************************************************************************************************* -->
+<aura:component implements="forceCommunity:availableForAllPageTypes,forceCommunity:themeLayout">
+    <div class="slds-grid slds-wrap" >
+        
+         <div class="slds-col slds-size_1-of-2">
+              <p class="footer-left">©ROC 2021</p>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <div class="slds-grid slds-wrap" >
+                <div class="slds-size_1-of-6">
+                   <img src="{!$Resource.BondPortalLogo}" class="footer-logo" />
+                </div>
+            	 <div class="slds-size_1-of-3">
+                     <p class='slds-p-right_medium'><b>AZ ROC</b> <br/>1700 W. Washington St. Suite 105 Phoenix, Arizona 85007-2812 </p>
+                   <a class="map" href="https://www.google.com/maps/place/1700+W+Washington+St,+Phoenix,+AZ+85007,+USA/@33.4484366,-112.1000334,17z/data=!3m1!4b1!4m5!3m4!1s0x872b13d2f0c62083:0x53a1ed8ca50204f0!8m2!3d33.4484366!4d-112.0978447" target="_blank">Find in Google Maps</a>
+                </div>
+                <div class="slds-size_1-of-4">
+                    <br/>
+                    <p>Phone: (602) 542-1525 </p>
+                    <p>Fax: (602) 542-1599 </p>
+                </div>
+                <div class="slds-size_1-of-4 footer-icon">
+                      <a href="https://twitter.com/az_ROC" target="_blank"> <img src="{!$Resource.BondPoratalTwitter}"/> </a>
+                      <a href="https://www.facebook.com/ArizonaROC" target="_blank"> <img src="{!$Resource.BondPoratalFacebook}"/> </a>
+                       <a href="https://www.linkedin.com/company/arizona-registrar-of-contractors/" target="_blank"> <img src="{!$Resource.BondPoratalLinkedin}"/> </a>
+                      <a href="https://www.instagram.com/az_registrarofcontractors/" target="_blank"> <img src="{!$Resource.BondPoratalInstagram}"/> </a>
+                      <a href="https://www.youtube.com/channel/UC1jhQf99PCm1RLkyiRc26Ow" target="_blank"> <img src="{!$Resource.BondPoratalYoutube}"/> </a>
+                </div>
+  
+            </div>
+          
+        </div>
+    </div>
+ </aura:component>

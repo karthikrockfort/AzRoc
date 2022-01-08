@@ -1,0 +1,20 @@
+.THIS {
+    background-color:#F2F0ED;
+    padding:15px;
+}
+.THIS .footer-logo{
+    width:90px;
+}
+.THIS .footer-left{
+    margin-top: 5%;
+    margin-left: 5%;
+}
+.THIS .map{
+    color:#1592E6;
+}
+.THIS .footer-icon img{
+    width: 15px;
+    height:15px;
+    margin: 5px;
+    margin-top: 15%;
+}

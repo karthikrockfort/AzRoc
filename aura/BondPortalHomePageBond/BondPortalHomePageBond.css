@@ -1,0 +1,94 @@
+.THIS{
+    margin:20px;
+}
+.THIS.table-section{
+    /*overflow-x:scroll;*/
+}
+.THIS.table-title{
+    font-size: 20px !important;
+}
+.THIS .slds-table{
+    border:1px solid #ccc !important;
+}
+.THIS table thead th{
+    padding:0px !important;    
+}
+.THIS .header-bg{
+    background:#426AA3 !important;
+    color:#fff;
+    font-size:12px;
+    padding: 10px;
+    cursor: pointer;
+}
+.THIS .slds-button {
+    font-size:12px;
+}
+.THIS .new-bond-btn{
+    background:#405574!important;
+    color:#fff;
+}
+.THIS .records-perpage{
+    display:inline-block;
+}
+.THIS .search-box{
+    background:#ECECEC !important;
+    min-height: 200px;
+    padding: 20px;
+}
+.THIS .search-btn{
+     background:#405574!important;
+     color:#fff;
+     min-width: 100px;
+    padding: 0px 10px;
+    border:2px solid #405574;
+}
+.THIS .clear-btn{
+    border:2px solid #405574;
+}
+.THIS .records-perpage{
+    display:inline-block;
+}
+.THIS .slds-input__icon{
+    width: 50px;
+    height: 32px;
+    background: #CFCFCF;
+    position: absolute;
+    top: 7px;
+    left: -25px;
+    text-align: center;
+    padding-top: 8px;
+}
+.THIS label{
+    font-weight:bold;
+}
+.THIS .slds-input:focus, 
+.THIS .slds-input:active{
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+.THIS svg[data-key=switch],
+.THIS svg[data-key=switch] {
+    fill: #fff;
+}
+.THIS .move-label{
+    position: relative;
+    left: -25px;
+    font-weight: bold;
+}
+.THIS .bwd-btn,
+.THIS .fwd-btn{
+    min-height: 32px;
+}
+.THIS .bwd-btn lightning-icon,
+.THIS .fwd-btn lightning-icon{
+    margin: -10px;
+}
+.THIS .left-btn,
+.THIS .right-btn{
+    max-width: 30px;
+}
+.THIS .left-btn svg,
+.THIS .right-btn svg{
+    margin-left:0px;
+    margin-right:0px;
+}

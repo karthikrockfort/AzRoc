@@ -1,0 +1,252 @@
+.THIS .bondLogo{
+    width:90px;
+}
+/* Formating Profile Icon */
+@media all and (max-width: 1024px) {
+    .THIS .profileIcon { 
+        width: 40% !important;
+    }
+}
+@media all and (max-width: 768px) {
+    .THIS .profileIcon {
+        width: 50% !important;
+    }
+    .THIS ul.slds-list_horizontal li {
+        font-size: 14px !important;
+        padding: 10px 10px !important;
+    }
+    .THIS .notifications div {
+        float: none;
+    }
+}
+@media all and (max-width: 480px) {
+    .THIS .menu-item {
+        display: none !important;
+    }
+    .THIS .nav-item {
+        display: inline-block !important;
+    }
+    .THIS .profileIcon {
+        width: 50% !important;
+        border: 2px solid rgb(107,109,112);
+        border-radius: 20px;
+    }
+    .THIS .navList {
+        background-color: #fff;
+        position: absolute;
+        top: 100%;
+        right: 4%;
+        display: table;
+        z-index: 1;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    }
+    .THIS .dropdown-content {
+        right: 0 !important;
+    }
+    .THIS .notifications div {
+        float: none;
+    }
+    .THIS .uiMenuList--default .uiMenuItem>a {
+        display: block;
+        padding: .5rem .75rem;
+        color: #333;
+        position: relative;
+        white-space: nowrap;
+        font-size: .75rem;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+    .THIS .uiMenuList--default .uiMenuItem>span {
+        display: block;
+        padding: .5rem .75rem;
+        color: #333;
+        position: relative;
+        white-space: nowrap;
+        font-size: .75rem;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+    }
+}
+.THIS .nav-item {
+    display: none;
+}
+.THIS .profileIcon {
+    width: 30%;
+    border-radius: 30px;
+}
+.THIS .profileIcon svg {
+    fill : white;
+}
+.THIS .profileIconTop{
+    padding-top : 1%;
+}
+.THIS .paddingTop {
+    padding-top : 0%;
+}
+/* Formatting Profile Dropdown */
+.THIS ul.slds-list_horizontal li {
+    font-size: 16px;
+    padding: 10px 14px;
+}
+.THIS ul.slds-list_horizontal li a {
+    text-decoration: none;
+    color: #FFF;
+}
+.THIS ul.slds-list_horizontal li a:hover {
+    color: #FFF;
+}
+/* Formatting Dropdown Menu List */
+.THIS .dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    color: #FFF;
+}
+.THIS .dropdown {
+    position: relative;
+    display: inline-block;
+}
+.THIS .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.THIS .uiMenuList--default.uiMenuList {
+    background: #f9f9f9;
+    background-color: #f9f9f9;
+    color: #595A5A !important;
+    min-width:300px;
+    margin-top: 0.8rem;
+    border-radius: 0px;
+    border: 1px solid #f9f9f9;
+}
+.THIS .uiMenuList--default .uiMenuItem>a,.THIS .uiMenuList--default .uiMenuItem>span {
+    color: #595A5A;
+    font-size: 14px;
+}
+.THIS .uiMenuList--default .uiMenuItem > a:active,.THIS .uiMenuList--default .uiMenuItem > span:active {
+    background-color: #f9f9f9; 
+}
+.THIS .dropdown-content a {
+    color: #BABABA;
+    padding: 4px 10px;
+    text-decoration: none;
+    display: block;
+}
+.THIS .dropdown:hover .dropdown-content {
+    display: block;
+}
+/* Showing Active Menu Item */
+.THIS li.active a {
+    color: #FFF !important;
+}
+.THIS span.active {
+    color: #FFF;
+}
+.THIS .dropdown:hover {
+    color: #FFF;
+}
+.THIS {
+    border : 0;
+    border-radius : 0;
+}
+.THIS .bgImage {
+    min-width : 100%;
+    height : 100px;
+}
+.THIS .headNav {
+    background-color:#426AA3;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.THIS .logoSubText{
+    color: #fff;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.THIS .header-top{
+    background-color:#3B3B3B;
+    width:100%;
+    height:50px;
+}
+.THIS .header-top li{
+    color:#fff;
+    display:inline-block;
+    padding: 5px;
+}
+.THIS .header-top li a{
+    color:#fff;
+    margin-left: 5px;
+    text-decoration: none;
+}
+.THIS .header-top .slds-float_left{
+    padding-top:10px;
+}
+.THIS .header-top .right-top{
+    padding-top:5px;
+}
+.THIS .header-top .profileIcon .svg{
+    margin-top:0px !important;
+}
+.THIS .header-top .profileIcon{
+    height: 0px;
+    width: 0px;
+    margin-right: 15px;
+}
+.THIS .header-top .search-icon svg{
+    fill: white;
+    width: 15px;
+    margin-right: 5px;
+}
+.THIS .header-top .knowledge_base{
+    height: 0;
+    width: 0;
+    margin-right: 15px;
+}
+.THIS .header-top .knowledge_base svg{
+    fill: white;
+    width: 15px;
+}
+.THIS .header-top .slds-float_right img{
+    height: 20px;
+}
+.THIS .static-header ul li{
+    color:#fff;
+}
+.THIS .actionMenu .slds-icon svg{
+    fill:#717171;
+    /*cursor:pointer;*/
+}
+.THIS .profileListMenuIcon{
+    float:left;
+    width:20%;
+}
+.THIS .uiMenuList--default .uiMenuItem > a, .THIS .uiMenuList--default .uiMenuItem > span{
+    padding:0px;
+    width:80%;
+    text-align: left;
+    padding-left: 5px;
+}
+.THIS .profile-icon{
+    width:100%;
+}
+.THIS .actionMenu ul .option-outer{
+    float:left;
+    width:100%;
+}
+.THIS .profile-icon .slds-icon-action-user{
+    float:left;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.THIS .uiMenuList--default.uiMenuList{
+    left:-50px !important;
+}
+.THIS .profile-icon p{
+    float:left;
+    margin-left:5px;
+}

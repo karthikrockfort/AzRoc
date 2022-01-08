@@ -1,0 +1,202 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="BondPortalDashboard_AC">
+    
+    <aura:attribute name="allData" type="List" /> 
+    <aura:attribute name="filteredData" type="List" />
+    <aura:attribute name="tableData" type="List" />
+    <aura:attribute name="columns" type="Object[]" />
+    <aura:attribute name="pageSize" type="Integer" default="3" />
+    <aura:attribute name="pageSizeOptions" type="Integer[]" default="3,5,10" />
+    <aura:attribute name="currentPageNumber" type="Integer" default="1" />
+    <aura:attribute name="totalPages" type="Integer" default="1" />
+    <aura:attribute name="searchBonds" type="String" />
+    <aura:attribute name="searchLicense" type="String" />
+    <aura:attribute name="searchApplication" type="String" />
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="Canceloptions" type="List" />
+    <aura:attribute name="selectedValue" type="String" />
+    <aura:attribute type="Boolean" name="sortAsc" />
+    <aura:attribute type="String" name="sortField" />
+    <aura:attribute type="Boolean" name="DoingBusiness"/>
+    
+    <aura:attribute name="showTable" type="Boolean" default="false"/>
+    <aura:attribute name="showTableMsg" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.loadOptions}" />
+    <aura:handler name="init" value="{!this}" action="{!c.loadCancelOptions}" />
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    
+    
+    <h1 class="table-title">Associated Bonds</h1>
+    <div class="slds-m-bottom_x-large">
+        <div class="search-box"> <strong>Search Associated Bonds with one of the following criteria:</strong>
+            <div class="slds-grid slds-gutters slds-m-top_xx-large">
+                <div class="slds-col slds-size_1-of-4">
+                    <lightning:input label="Enter Bond Number" type="text" value="{! v.searchBonds }" /> 
+                </div>
+                <div class="slds-col slds-text-align_center slds-m-top_large"> <strong> -or- </strong> </div>
+                <div class="slds-col slds-size_1-of-4">
+                    <label class="slds-form-element__label move-label" for="text-input-id-1">Search ROC No</label>
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                        <div class="slds-input__icon slds-input__icon_left slds-icon-text-default" aria-hidden="true"> ROC- </div>
+                        <input type="text" id="SearchRocNo" value="{! v.searchLicense }" class="slds-input roc-input" /> </div>
+                </div>
+                <div class="slds-col slds-text-align_center slds-m-top_large"> <strong> -or- </strong> </div>
+                <div class="slds-col slds-size_1-of-4">
+                    <label class="slds-form-element__label move-label" for="text-input-id-1">Search APPLN No</label>
+                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon_left">
+                        <div class="slds-input__icon slds-input__icon_left slds-icon-text-default" aria-hidden="true"> APP- </div>
+                        <input type="text" value="{! v.searchApplication }" id="SearchAppNo" class="slds-input" /> </div>
+                </div>
+            </div>
+            <div class="slds-float_right slds-m-top_small">
+                <lightning:button class="clear-btn" label="Clear Search" variant="neutral" onclick="{! c.clearSerch }" />
+                <lightning:button class="search-btn" label="Search" variant="neutral" onclick="{! c.handleSearch }" /> </div>
+        </div>
+    </div>
+    
+    <aura:if isTrue="{!v.showTable}">   
+        <div class="table-section">
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                <thead>
+                    <tr class="slds-text-title_caps">
+                        <th scope="col" class="header-bg" onclick="{!c.sortByBondNumber}">
+                            <div class="slds-truncate header-bg" title="BusinessEntityName"> 
+                                <span>  
+                                    <aura:if isTrue="{!v.DoingBusiness}">
+                                        Bond Number  <lightning:icon iconName="utility:arrowup"  size="xx-small" alternativeText="Indicates approval"/>
+                                        <aura:set attribute="else">
+                                            Bond Number <lightning:icon iconName="utility:arrowdown"  size="xx-small" alternativeText="Indicates approval"/>
+                                        </aura:set> 
+                                    </aura:if> 
+                                </span> 
+                            </div>
+                        </th>
+                        
+                        <th scope="col" class="header-bg" onclick="{!c.sortByBusinessName}">
+                            <div class="slds-truncate header-bg" title="BusinessEntityName"> <span>  <aura:if isTrue="{!v.DoingBusiness}">
+                                Business Entity Name <lightning:icon iconName="utility:arrowup"  size="xx-small" alternativeText="Indicates approval"/>
+                                <aura:set attribute="else">
+                                    Business Entity Name   <lightning:icon iconName="utility:arrowdown"  size="xx-small" alternativeText="Indicates approval"/>
+                                </aura:set> 
+                                </aura:if> 
+                                </span> </div>
+                        </th>
+                        <th scope="col" class="header-bg" onclick="{!c.sortByROCNumber}">
+                            <div class="slds-truncate header-bg" title="BusinessEntityName"> <span>  <aura:if isTrue="{!v.DoingBusiness}">
+                                ROC License Number <lightning:icon iconName="utility:arrowup"  size="xx-small" alternativeText="Indicates approval"/>
+                                <aura:set attribute="else">
+                                    ROC License Number    <lightning:icon iconName="utility:arrowdown"  size="xx-small" alternativeText="Indicates approval"/>
+                                </aura:set> 
+                                </aura:if> 
+                                </span> </div>
+                        </th>
+                        <th scope="col" class="header-bg" onclick="{!c.sortByApplicationNumber}">
+                            <div class="slds-truncate header-bg" title="BusinessEntityName"> <span>  <aura:if isTrue="{!v.DoingBusiness}">
+                                Application Number <lightning:icon iconName="utility:arrowup"  size="xx-small" alternativeText="Indicates approval"/>
+                                <aura:set attribute="else">
+                                    Application Number   <lightning:icon iconName="utility:arrowdown"  size="xx-small" alternativeText="Indicates approval"/>
+                                </aura:set> 
+                                </aura:if>   
+                                </span> </div>
+                        </th>
+                        <th scope="col" class="header-bg" onclick="{!c.sortByBondStatus}">
+                            <div class="slds-truncate header-bg" title="BusinessEntityName"> <span>  <aura:if isTrue="{!v.DoingBusiness}">
+                                Bond Status  <lightning:icon iconName="utility:arrowup"  size="xx-small" alternativeText="Indicates approval"/>
+                                <aura:set attribute="else">
+                                    Bond Status <lightning:icon iconName="utility:arrowdown"  size="xx-small" alternativeText="Indicates approval"/>
+                                </aura:set> 
+                                </aura:if> 
+                                </span> </div>
+                        </th>
+                        <th scope="col" class="header-bg" onclick="{!c.sortByBondSubStatus}">
+                            <div class="slds-truncate header-bg" title="BusinessEntityName"> <span>  <aura:if isTrue="{!v.DoingBusiness}">
+                                Bond Sub-Status  <lightning:icon iconName="utility:arrowup"  size="xx-small" alternativeText="Indicates approval"/>
+                                <aura:set attribute="else">
+                                    Bond Sub-Status <lightning:icon iconName="utility:arrowdown"  size="xx-small" alternativeText="Indicates approval"/>
+                                </aura:set> 
+                                </aura:if> 
+                                </span> 
+                            </div>
+                        </th>
+                        <th scope="col" class="header-bg">
+                            <div class="slds-truncate header-bg" title="Name">Actions</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <aura:iteration items="{!v.tableData}" var="account">
+                        <tr>
+                            <th scope="row" data-label="Bond Number">
+                                <div class="slds-truncate" title="{!account.Bond_Number__c}">{!account.Bond_Number__c}</div>
+                            </th>
+                            <th scope="row" data-label="Acount Name">
+                                <div class="slds-truncate" title="{!account.Application__r.Account__r.Name}">{!account.Application__r.Account__r.Name}</div>
+                            </th>  
+                            <th scope="row" data-label="License Number">
+                                <div class="slds-truncate" title="{!account.License__c}">{!account.License__r.Name}</div>
+                            </th>
+                            <th scope="row" data-label="Application Number">
+                                <div class="slds-truncate" title="{!account.Application__r}">{!account.Application__r.Name}</div>
+                            </th>
+                            <th scope="row" data-label="Status">
+                                <div class="slds-truncate" title="{!account.Status__c}">{!account.Status__c}</div>
+                            </th>
+                            <th scope="row" data-label="SubStatus">
+                                <div class="slds-truncate" title="{!account.Sub_Status__c}">{!account.Sub_Status__c}</div>
+                            </th>
+                            
+                            <th scope="row" data-label="account Name"> 
+                                <aura:if isTrue="{! and(account.Status__c =='Active',account.Sub_Status__c =='Pending Cancellation')}">
+                                    <lightning:select  name="{!account.Id}"  onchange="{! c.openBondPage }">
+                                        <option value="">-- None --</option>
+                                        <aura:iteration  items="{!v.Canceloptions}" var="item">
+                                            <option  text="{!item.label}" value="{!item.value}" selected="{!item.selected}" /> </aura:iteration>
+                                    </lightning:select>
+                                    <aura:set attribute="else">
+                                        <lightning:select  name="{!account.Id}"  onchange="{! c.openBondPage }">
+                                            <option value="">-- None --</option>
+                                            <aura:iteration  items="{!v.options}" var="item">
+                                                <option  text="{!item.label}" value="{!item.value}" selected="{!item.selected}" /> </aura:iteration>
+                                        </lightning:select>
+                                    </aura:set>
+                                </aura:if> 
+                            </th>
+                        </tr>
+                    </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="slds-p-around_small slds-grid slds-grid_align-spread slds-grid_vertical-align-start">
+            <div> <span class="">
+                Showing Page {! (v.currentPageNumber) } of {! (v.totalPages) }
+                </span> <span class="">
+                -  {!(v.filteredData.length)} Total Records
+                </span> </div>
+            <div> <span>Records Per page </span>
+                <div class="records-perpage slds-m-right_small">
+                    <lightning:select value="{! v.pageSize }" onchange="{! c.onPageSizeChange }">
+                        <aura:iteration items="{! v.pageSizeOptions }" var="opt">
+                            <option text="{! opt }"></option>
+                        </aura:iteration>
+                    </lightning:select>
+                </div>
+                <lightning:button  class="bwd-btn" onclick="{! c.onFirst }" disabled="{! v.currentPageNumber == 1 }" >
+                    <lightning:icon iconName="utility:left"  size="xx-small" alternativeText="Indicates approval"/>
+                    <lightning:icon iconName="utility:left"  size="xx-small" alternativeText="Indicates approval"/>
+                </lightning:button>
+                <lightning:button class="left-btn" iconName="utility:left" iconPosition="left" onclick="{! c.onPrev }" disabled="{! v.currentPageNumber == 1 }" />
+                <lightning:button class="right-btn" iconName="utility:right" iconPosition="right" onclick="{! c.onNext }" disabled="{! v.currentPageNumber == v.totalPages }" />
+                <lightning:button class="fwd-btn" onclick="{! c.onLast }" disabled="{! v.currentPageNumber == v.totalPages }"> 
+                    <lightning:icon iconName="utility:right"  size="xx-small" alternativeText="Indicates approval"/>
+                    <lightning:icon iconName="utility:right"  size="xx-small" alternativeText="Indicates approval"/>
+                </lightning:button>
+            </div>
+        </div> 
+    </aura:if>    
+    
+    <aura:if isTrue="{!v.showTableMsg}">
+        <h1 class="slds-align_absolute-center">There is no records in your application.</h1>
+    </aura:if>
+    
+</aura:component>
